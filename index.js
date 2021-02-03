@@ -1,4 +1,4 @@
-var {fortunes} = require('./data');
+var {getFortune} = require('./lib/fortunes');
 var express = require('express');
 var app = express();
 var handlebars = require('express3-handlebars').create({ defaultLayout:'main' });
@@ -11,8 +11,8 @@ app.get('/', function(req, res){
  res.render('home');
 });
 app.get('/about', function(req, res){
-    var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', {fortune : randomFortune});
+    fortune = getFortune();
+    res.render('about', {fortune});
 });
 // custom 404 page
 app.use(function(req, res){
